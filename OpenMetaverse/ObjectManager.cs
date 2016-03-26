@@ -2495,19 +2495,23 @@ namespace OpenMetaverse
                     // Floating text
                     if ((flags & CompressedFlags.HasText) != 0)
                     {
-                        string text = String.Empty;
+                        int idx = i;
+                        int j = 0;
                         while (block.Data[i] != 0)
                         {
-                            text += (char)block.Data[i];
                             i++;
+                            j++;
                         }
                         i++;
 
                         // Floating text
-                        prim.Text = text;
+                        prim.Text = Utils.BytesToString(block.Data, idx, j);
 
                         // Text color
-                        prim.TextColor = new Color4(block.Data, i, false);
+                        byte[] color = new byte[4];
+                        Array.Copy(block.Data, i, color, 0, 4);
+                        prim.TextColor = new Color4(color,0,false,true);
+                        color = null;
                         i += 4;
                     }
                     else
@@ -2518,15 +2522,16 @@ namespace OpenMetaverse
                     // Media URL
                     if ((flags & CompressedFlags.MediaURL) != 0)
                     {
-                        string text = String.Empty;
+                        int idx = i;
+                        int j = 0;
                         while (block.Data[i] != 0)
                         {
-                            text += (char)block.Data[i];
                             i++;
+                            j++;
                         }
                         i++;
 
-                        prim.MediaURL = text;
+                        prim.MediaURL = Utils.BytesToString(block.Data, idx, j);
                     }
 
                     // Particle system
