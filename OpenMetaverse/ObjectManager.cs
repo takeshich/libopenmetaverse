@@ -2509,7 +2509,7 @@ namespace OpenMetaverse
 
                         // Text color
                         byte[] color = new byte[4];
-                        Array.Copy(block.Data, i, color, 0, 4);
+                        Buffer.BlockCopy(block.Data, i, color, 0, 4);
                         prim.TextColor = new Color4(color,0,false,true);
                         color = null;
                         i += 4;
