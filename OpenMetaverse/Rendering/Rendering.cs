@@ -183,11 +183,28 @@ namespace OpenMetaverse.Rendering
         public FaceMask Mask;
         public Primitive.TextureEntryFace TextureFace;
         public object UserData;
+        public List<VertexWeight> Weights;
 
         public override string ToString()
         {
             return Mask.ToString();
         }
+    }
+
+    public struct VertexWeight
+    {
+        public byte JointIndex;
+        public ushort Weight;
+    }
+
+    public struct SkinJoint
+    {
+        public List<string> JointNames;
+        public Matrix4 BindShapeMatrix;
+        public List<Matrix4> InverseBindMatrix;
+        public List<Matrix4> AltInverseBindmatrix;
+        public Vector3 PelvisOffset;
+
     }
 
     #endregion Structs
@@ -237,6 +254,10 @@ namespace OpenMetaverse.Rendering
     {
         /// <summary>List of primitive faces</summary>
         public List<Face> Faces;
+    
+        /// <summary>List of skin joints</summary>
+        public SkinJoint Skin;
+        public bool HasSkinJoints = false;
 
         /// <summary>
         /// Decodes mesh asset into FacetedMesh
@@ -308,6 +329,7 @@ namespace OpenMetaverse.Rendering
                         oface.Vertices = new List<Vertex>();
                         oface.Indices = new List<ushort>();
                         oface.TextureFace = prim.Textures.GetFace((uint)faceNr);
+                        oface.Weights = new List<VertexWeight>();
 
                         OSDMap subMeshMap = (OSDMap)subMeshOsd;
 
@@ -400,10 +422,94 @@ namespace OpenMetaverse.Rendering
                             oface.Indices.Add(v3);
                         }
 
+                        // Weights
+                        byte[] weightsBytes = null;
+                        if (subMeshMap.ContainsKey("Weights"))
+                        {
+                            weightsBytes = subMeshMap["Weights"];
+                            for (int i = 0; i < weightsBytes.Length; i += 3)
+                            {
+                                if (weightsBytes[i] == 0xFF)
+                                    break;
+
+                                VertexWeight vw = new VertexWeight();
+                                vw.JointIndex = weightsBytes[i];
+                                vw.Weight = (ushort)(Utils.BytesToUInt16(weightsBytes, i + 1));
+                                oface.Weights.Add(vw);
+                            }
+                        }
+
+
                         mesh.Faces.Add(oface);
                     }
                 }
 
+                OSD skinjointsOSD = null;
+                skinjointsOSD = MeshData["skin"];
+
+                if (skinjointsOSD != null && skinjointsOSD is OSDMap)
+                {
+                    mesh.HasSkinJoints = true;
+                    SkinJoint skinjoints = new SkinJoint();
+                    skinjoints.JointNames = new List<string>();
+                    skinjoints.InverseBindMatrix = new List<Matrix4>();
+                    skinjoints.AltInverseBindmatrix = new List<Matrix4>();
+                    OSDMap skinblockMap = (OSDMap)skinjointsOSD;
+                    //skinblockMap["bind_shape_matrix"];
+
+                    //joint_names
+                    OSDArray jointname = (OSDArray)skinblockMap["joint_names"];
+
+
+                    for (int i = 0; i < jointname.Count; i++)
+                    {
+                        string jname = jointname[i].AsString();
+                        skinjoints.JointNames.Add(jname);
+                    }
+
+                    //bind_shape_matrix
+                    OSDArray bindshapematrix = (OSDArray)skinblockMap["bind_shape_matrix"];
+                    Matrix4 bsmt = new Matrix4((float)bindshapematrix[0].AsReal(), (float)bindshapematrix[1].AsReal(), (float)bindshapematrix[2].AsReal(), (float)bindshapematrix[3].AsReal(),
+                                                 (float)bindshapematrix[4].AsReal(), (float)bindshapematrix[5].AsReal(), (float)bindshapematrix[6].AsReal(), (float)bindshapematrix[7].AsReal(),
+                                                 (float)bindshapematrix[8].AsReal(), (float)bindshapematrix[9].AsReal(), (float)bindshapematrix[10].AsReal(), (float)bindshapematrix[11].AsReal(),
+                                                 (float)bindshapematrix[12].AsReal(), (float)bindshapematrix[13].AsReal(), (float)bindshapematrix[14].AsReal(), (float)bindshapematrix[15].AsReal());
+                    skinjoints.BindShapeMatrix = bsmt;
+
+                    //inverse_bind_matrix
+                    OSDArray inversebindmatrices = (OSDArray)skinblockMap["inverse_bind_matrix"];
+                    for (int i = 0; i < inversebindmatrices.Count; i++)
+                    {
+                        OSDArray m = (OSDArray)inversebindmatrices[i];
+                        Matrix4 mt = new Matrix4((float)m[0].AsReal(), (float)m[1].AsReal(), (float)m[2].AsReal(), (float)m[3].AsReal(),
+                                                 (float)m[4].AsReal(), (float)m[5].AsReal(), (float)m[6].AsReal(), (float)m[7].AsReal(),
+                                                 (float)m[8].AsReal(), (float)m[9].AsReal(), (float)m[10].AsReal(), (float)m[11].AsReal(),
+                                                 (float)m[12].AsReal(), (float)m[13].AsReal(), (float)m[14].AsReal(), (float)m[15].AsReal());
+                        skinjoints.InverseBindMatrix.Add(mt);
+                    }
+
+                    //alt_inverse_bind_matrix
+                    if (skinblockMap.ContainsKey("alt_inverse_bind_matrix"))
+                    {
+                        OSDArray altinversebindmatrices = (OSDArray)skinblockMap["alt_inverse_bind_matrix"];
+                        for (int i = 0; i < altinversebindmatrices.Count; i++)
+                        {
+                            OSDArray am = (OSDArray)altinversebindmatrices[i];
+                            Matrix4 amt = new Matrix4((float)am[0].AsReal(), (float)am[1].AsReal(), (float)am[2].AsReal(), (float)am[3].AsReal(),
+                                                     (float)am[4].AsReal(), (float)am[5].AsReal(), (float)am[6].AsReal(), (float)am[7].AsReal(),
+                                                     (float)am[8].AsReal(), (float)am[9].AsReal(), (float)am[10].AsReal(), (float)am[11].AsReal(),
+                                                     (float)am[12].AsReal(), (float)am[13].AsReal(), (float)am[14].AsReal(), (float)am[15].AsReal());
+                            skinjoints.AltInverseBindmatrix.Add(amt);
+                        }
+                    }
+
+                    //pelvis_offset
+                    if (skinblockMap.ContainsKey("pelvis_offset"))
+                    {
+                        skinjoints.PelvisOffset = skinblockMap["alt_inverse_bind_matrix"];
+                    }
+
+                    mesh.Skin = skinjoints;
+                }
             }
             catch (Exception ex)
             {
