@@ -212,6 +212,7 @@ namespace OpenMetaverse.Rendering
         public string Name;
         public Matrix4 InverseBindMatrix;
         public Matrix4 AltInverseBindMatrix;
+        public int Count;
 
     }
 
@@ -438,39 +439,67 @@ namespace OpenMetaverse.Rendering
                         {
                             oface.HasWeights = true;
                             int i = 0;
-                            int j = 0;
                             weightsBytes = subMeshMap["Weights"];
-                            while(i < weightsBytes.Length)
+
+                            while (i < weightsBytes.Length)
                             {
-
-                                
-                                JointWeight vw = new JointWeight();
-                                if (weightsBytes[i] == (byte)0xFF)
+                                List<JointWeight> lvw = new List<JointWeight>()
                                 {
-                                    int count = 4 - j;
-                                    for (int k = 0; k < count; k++)
+                                    new JointWeight() {JointIndex = 0,Weight = 0f }
+                                    ,new JointWeight() {JointIndex = 0,Weight = 0f }
+                                    ,new JointWeight() {JointIndex = 0,Weight = 0f }
+                                    ,new JointWeight() {JointIndex = 0,Weight = 0f }
+                                };
+                                int j = 0;
+
+                                while (i < weightsBytes.Length && j < 4)
+                                {
+                                    JointWeight jw = lvw[j];
+                                    jw.JointIndex = (int)weightsBytes[i];
+
+                                    if (weightsBytes[i] == (byte)0xFF)
                                     {
-                                        vw.JointIndex = (int)weightsBytes[i];
-                                        vw.Weight = 0f;
-                                        oface.Weights.Add(vw);
-                                        oface.WeightsF.Add(vw.JointIndex + vw.Weight);
+                                        lvw[j] = jw;
+                                        i++;
+                                        break;
                                     }
-
-                                    j = 0;
-                                    i++;
-                                }
-                                else
-                                { 
-                                    vw.JointIndex = (int)weightsBytes[i];
-                                    vw.Weight = Utils.Clamp((float)(Utils.BytesToUInt16(weightsBytes, i + 1))/(float)ushort.MaxValue,0f, 0.99999f);
-                                    i += 3;
-                                    j++;
-                                    oface.Weights.Add(vw);
-                                    oface.WeightsF.Add(vw.JointIndex + vw.Weight);
-                                    //Console.WriteLine(vw.JointIndex.ToString()+":"+vw.Weight.ToString());
+                                    else
+                                    {
+                                        jw.Weight = Utils.Clamp((float)(Utils.BytesToUInt16(weightsBytes, i+1)) / (float)ushort.MaxValue, 0f, 0.99999f);
+                                        lvw[j] = jw;
+                                        i += 3;
+                                        j++;
+                                    }
                                 }
 
-                                
+                                float weightSum = 0f;
+                                foreach (var s in lvw)
+                                {
+                                    weightSum += s.Weight;
+                                }
+
+                                if (weightSum <= 0f)
+                                {
+                                    for (int l = 0; l < 4; l++)
+                                    {
+                                        JointWeight jw = lvw[l];
+                                        if (l == 0)
+                                        {
+                                            jw.Weight = 0.99999f;
+                                        }
+                                        else
+                                        {
+                                            jw.Weight = 0f;
+                                        }
+                                        lvw[i] = jw;
+                                    }
+                                }
+
+                                foreach (var s in lvw)
+                                {
+                                    oface.Weights.Add(s);
+                                    oface.WeightsF.Add(s.JointIndex + s.Weight);
+                                }
                             }
                         }
 
@@ -502,6 +531,7 @@ namespace OpenMetaverse.Rendering
                         sj.InverseBindMatrix = Matrix4.Identity;
                         sj.AltInverseBindMatrix = Matrix4.Identity;
                         sj.Name = jointnames[i].AsString();
+                        sj.Count = jointnames.Count;
 
                         //inverse_bind_matrix
                         OSDArray inversebindmatrices = (OSDArray)skinMap["inverse_bind_matrix"];
@@ -512,6 +542,7 @@ namespace OpenMetaverse.Rendering
                                                     (float)m[4].AsReal(), (float)m[5].AsReal(), (float)m[6].AsReal(), (float)m[7].AsReal(),
                                                     (float)m[8].AsReal(), (float)m[9].AsReal(), (float)m[10].AsReal(), (float)m[11].AsReal(),
                                                     (float)m[12].AsReal(), (float)m[13].AsReal(), (float)m[14].AsReal(), (float)m[15].AsReal());
+
                         sj.InverseBindMatrix = mt;
 
 
@@ -525,6 +556,7 @@ namespace OpenMetaverse.Rendering
                                                         (float)am[4].AsReal(), (float)am[5].AsReal(), (float)am[6].AsReal(), (float)am[7].AsReal(),
                                                         (float)am[8].AsReal(), (float)am[9].AsReal(), (float)am[10].AsReal(), (float)am[11].AsReal(),
                                                         (float)am[12].AsReal(), (float)am[13].AsReal(), (float)am[14].AsReal(), (float)am[15].AsReal());
+
                             sj.AltInverseBindMatrix = amt;
                         }
 
@@ -537,6 +569,7 @@ namespace OpenMetaverse.Rendering
                                                  (float)bindshapematrix[4].AsReal(), (float)bindshapematrix[5].AsReal(), (float)bindshapematrix[6].AsReal(), (float)bindshapematrix[7].AsReal(),
                                                  (float)bindshapematrix[8].AsReal(), (float)bindshapematrix[9].AsReal(), (float)bindshapematrix[10].AsReal(), (float)bindshapematrix[11].AsReal(),
                                                  (float)bindshapematrix[12].AsReal(), (float)bindshapematrix[13].AsReal(), (float)bindshapematrix[14].AsReal(), (float)bindshapematrix[15].AsReal());
+
                     mesh.Skin.BindShapeMatrix = bsmt;
 
 
