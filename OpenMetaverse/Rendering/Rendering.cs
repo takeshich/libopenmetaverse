@@ -295,7 +295,6 @@ namespace OpenMetaverse.Rendering
                 mesh.Profile.Faces = new List<ProfileFace>();
                 mesh.Profile.Positions = new List<Vector3>();
                 mesh.Path.Points = new List<PathPoint>();
-                
 
                 OSD facesOSD = null;
 
@@ -333,6 +332,15 @@ namespace OpenMetaverse.Rendering
                     // Decode each individual face
                     if (subMeshOsd is OSDMap)
                     {
+
+                        OSDMap subMeshMap = (OSDMap)subMeshOsd;
+
+                    // As per http://wiki.secondlife.com/wiki/Mesh/Mesh_Asset_Format, some Mesh Level
+                    // of Detail Blocks (maps) contain just a NoGeometry key to signal there is no
+                    // geometry for this submesh.
+                    if (subMeshMap.ContainsKey("NoGeometry") && ((OSDBoolean)subMeshMap["NoGeometry"]))
+                        continue;
+
                         Face oface = new Face();
                         oface.ID = faceNr;
                         oface.Vertices = new List<Vertex>();
@@ -341,8 +349,6 @@ namespace OpenMetaverse.Rendering
                         oface.HasWeights = false;
                         oface.Weights = new List<JointWeight>();
                         oface.WeightsF = new List<float>();
-
-                        OSDMap subMeshMap = (OSDMap)subMeshOsd;
 
                         Vector3 posMax;
                         Vector3 posMin;
@@ -502,7 +508,6 @@ namespace OpenMetaverse.Rendering
                                 }
                             }
                         }
-
 
                         mesh.Faces.Add(oface);
                     }
