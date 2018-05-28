@@ -6,15 +6,16 @@ xcopy jni\*.* ..\OpenMetaverse\jni\
 cd ..\OpenMetaverse\jni
 call %ANDROID_NDK_PATH%\ndk-build.cmd
 
-cd ..\..\bin
-mkdir Android
-xcopy /S ..\OpenMetaverse\libs Android\libs\
+cd ..\..\Android
+mkdir bin
+xcopy /S ..\OpenMetaverse\libs bin\libs\
 
-cd ..\Android
+Protobuild.exe --generate Android
 
-Protobuild.exe
-
-set MSBuild="C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
-echo %MSBuild% OpenMetaverse.Android.sln /p:Configuration=Release /property:OutputPath=..\bin\Android >> compile.cmd
+rem set MSBuild="C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
+set MSBuild="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
+echo %MSBuild% OpenMetaverse.Android.sln /p:Configuration=Release >> compile.cmd
 
 compile.cmd
+
+xcopy /S ..\OpenMetaverse\bin bin\
