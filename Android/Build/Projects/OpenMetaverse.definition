@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="OpenMetaverse" Path="..\OpenMetaverse" Type="Library">
+   <!-- Common assembly references -->
+  <References>
+    <!-- See FrameworkReferences.definition for the platform specific references -->
+    <Reference Include="OpenMetaverseReference" />
+  </References>
+ 
+  <Properties>
+    <NoWarn>1591,1574,0419,0618</NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <CustomDefinitions>
+      <Platform Name="Android">TRACE;ANDROID</Platform>
+    </CustomDefinitions>
+    <OutputPath>../bin/</OutputPath>
+  </Properties>
+
+  <Files>
+    <Compile Include="Assets\Asset.cs" />
+    <Compile Include="Assets\Archiving\ArchiveConstants.cs" />
+    <Compile Include="Assets\Archiving\AssetsArchiver.cs" />
+    <Compile Include="Assets\Archiving\OarFile.cs" />
+    <Compile Include="Assets\Archiving\RegionSettings.cs" />
+    <Compile Include="Assets\Archiving\TarArchiveReader.cs" />
+    <Compile Include="Assets\Archiving\TarArchiveWriter.cs" />
+    <Compile Include="Assets\AssetTypes\AssetAnimation.cs" />
+    <Compile Include="Assets\AssetTypes\AssetBodypart.cs" />
+    <Compile Include="Assets\AssetTypes\AssetClothing.cs" />
+    <Compile Include="Assets\AssetTypes\AssetGesture.cs" />
+    <Compile Include="Assets\AssetTypes\AssetLandmark.cs" />
+    <Compile Include="Assets\AssetTypes\AssetMesh.cs" />
+    <Compile Include="Assets\AssetTypes\AssetNotecard.cs" />
+    <Compile Include="Assets\AssetTypes\AssetPrim.cs" />
+    <Compile Include="Assets\AssetTypes\AssetScriptBinary.cs" />
+    <Compile Include="Assets\AssetTypes\AssetScriptText.cs" />
+    <Compile Include="Assets\AssetTypes\AssetSound.cs" />
+    <Compile Include="Assets\AssetTypes\AssetTexture.cs" />
+    <Compile Include="Assets\AssetTypes\AssetWearable.cs" />
+    <Compile Include="Capabilities\CapsBase.cs" />
+    <Compile Include="Capabilities\CapsClient.cs" />
+    <Compile Include="Capabilities\EventQueueClient.cs" />
+    <Compile Include="Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\IRendering.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\IRendering.cs">
+      <Link>Interfaces\IRendering.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Messages\LindenMessages.cs" />
+    <Compile Include="Messages\MessageEventDecoder.cs" />
+    <Compile Include="Messages\Messages.cs" />
+    <Compile Include="Primitives\ObjectMedia.cs" />
+    <Compile Include="Primitives\ParticleSystem.cs" />
+    <Compile Include="Primitives\Primitive.cs" />
+    <Compile Include="Primitives\TextureEntry.cs" />
+    <Compile Include="Rendering\LindenMesh.cs" />
+    <Compile Include="Rendering\Rendering.cs" />
+    <Compile Include="Rendering\LindenSkeleton.Xsd.cs" />
+    <Compile Include="Rendering\EndianAwareBinaryReader.cs" />
+    <Compile Include="Rendering\LindenSkeleton.Ext.cs" />
+    <Compile Include="Voice\TCPPipe.cs" />
+    <Compile Include="Voice\VoiceAccount.cs" />
+    <Compile Include="Voice\VoiceAux.cs" />
+    <Compile Include="Voice\VoiceConnector.cs" />
+    <Compile Include="Voice\VoiceControl.cs" />
+    <Compile Include="Voice\VoiceDefinitions.cs" />
+    <Compile Include="Voice\VoiceGateway.cs" />
+    <Compile Include="Voice\VoiceParticipant.cs" />
+    <Compile Include="Voice\VoiceSession.cs" />
+    <Compile Include="_Packets_.cs" />
+    <Compile Include="_VisualParam_.cs" />
+    <Compile Include="AgentManager.cs" />
+    <Compile Include="AgentManagerCamera.cs" />
+    <Compile Include="AgentManagerMovement.cs" />
+    <Compile Include="AgentThrottle.cs" />
+    <Compile Include="Animations.cs" />
+    <Compile Include="AppearanceManager.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssetCache.cs" />
+    <Compile Include="AssetManager.cs" />
+    <Compile Include="Avatar.cs" />
+    <Compile Include="AvatarManager.cs" />
+    <Compile Include="BitPack.cs" />
+    <Compile Include="BVHDecoder.cs" />
+    <Compile Include="Caps.cs" />
+    <Compile Include="CapsToPacket.cs" />
+    <Compile Include="CoordinateFrame.cs" />
+    <Compile Include="DirectoryManager.cs" />
+    <Compile Include="DownloadManager.cs" />
+    <Compile Include="EstateTools.cs" />
+    <Compile Include="EventDictionary.cs" />
+    <Compile Include="FriendsManager.cs" />
+    <Compile Include="GridClient.cs" />
+    <Compile Include="GridManager.cs" />
+    <Compile Include="GroupManager.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="InternalDictionary.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="InventoryManager.cs" />
+    <Compile Include="InventoryNode.cs" />
+    <Compile Include="InventoryNodeDictionary.cs" />
+    <Compile Include="Logger.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\Logger.cs">
+      <Link>Logger.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Login.cs" />
+    <Compile Include="NameValue.cs" />
+    <Compile Include="NetworkManager.cs" />
+    <Compile Include="ObjectManager.cs" />
+    <Compile Include="ObjectPool.cs" />
+    <Compile Include="ObjectPoolBase.cs" />
+    <Compile Include="ObservableDictionary.cs" />
+    <Compile Include="PacketDecoder.cs" />
+    <Compile Include="ParcelManager.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="ProtocolManager.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Simulator.cs" />
+    <Compile Include="SoundManager.cs" />
+    <Compile Include="Sounds.cs" />
+    <Compile Include="TerrainCompressor.cs" />
+    <Compile Include="TerrainManager.cs" />
+    <Compile Include="TexturePipeline.cs" />
+    <Compile Include="ThreadUtil.cs" />
+    <Compile Include="UDPBase.cs" />
+    <Compile Include="UtilizationStatistics.cs" />
+    <Compile Include="Imaging\BakeLayer.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\BakeLayer.cs">
+      <Link>Imaging\BakeLayer.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Imaging\ManagedImage.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\ManagedImage.cs">
+      <Link>Imaging\ManagedImage.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Imaging\OpenJPEG.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\OpenJPEG.cs">
+      <Link>Imaging\OpenJPEG.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Imaging\TGALoader.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\TGALoader.cs">
+      <Link>Imaging\TGALoader.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\BitmapDataExA.cs">
+      <Link>Imaging\BitmapDataExA.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="Assets\AssetTypes\AssetCallingCard.cs" />
+    <Compile Include="Assets\AssetTypes\AssetMutable.cs" />
+    <Compile Include="Parallel.cs" />
+    <Compile Include="WorkPool.cs" />
+
+    <EmbeddedNativeLibrary Include="libs\arm64-v8a\libopenjpeg-dotnet.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Platforms>Android</Platforms>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="libs\armeabi-v7a\libopenjpeg-dotnet.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Platforms>Android</Platforms>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="libs\armeabi\libopenjpeg-dotnet.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Platforms>Android</Platforms>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="libs\x86\libopenjpeg-dotnet.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Platforms>Android</Platforms>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="libs\x86_64\libopenjpeg-dotnet.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Platforms>Android</Platforms>
+    </EmbeddedNativeLibrary>
+
+    <None Include="jni\Android.mk" />
+    <None Include="jni\Application.mk" />
+    <None Include="jni\dotnet\dotnet.cpp" />
+    <None Include="jni\dotnet\dotnet.h" />
+    <None Include="jni\libopenjpeg\bio.c" />
+    <None Include="jni\libopenjpeg\bio.h" />
+    <None Include="jni\libopenjpeg\cidx_manager.c" />
+    <None Include="jni\libopenjpeg\cidx_manager.h" />
+    <None Include="jni\libopenjpeg\cio.c" />
+    <None Include="jni\libopenjpeg\cio.h" />
+    <None Include="jni\libopenjpeg\dwt.c" />
+    <None Include="jni\libopenjpeg\dwt.h" />
+    <None Include="jni\libopenjpeg\event.c" />
+    <None Include="jni\libopenjpeg\event.h" />
+    <None Include="jni\libopenjpeg\fix.h" />
+    <None Include="jni\libopenjpeg\image.c" />
+    <None Include="jni\libopenjpeg\image.h" />
+    <None Include="jni\libopenjpeg\indexbox_manager.h" />
+    <None Include="jni\libopenjpeg\int.h" />
+    <None Include="jni\libopenjpeg\j2k.c" />
+    <None Include="jni\libopenjpeg\j2k.h" />
+    <None Include="jni\libopenjpeg\j2k_lib.c" />
+    <None Include="jni\libopenjpeg\j2k_lib.h" />
+    <None Include="jni\libopenjpeg\jp2.c" />
+    <None Include="jni\libopenjpeg\jp2.h" />
+    <None Include="jni\libopenjpeg\jpt.c" />
+    <None Include="jni\libopenjpeg\jpt.h" />
+    <None Include="jni\libopenjpeg\mct.c" />
+    <None Include="jni\libopenjpeg\mct.h" />
+    <None Include="jni\libopenjpeg\mqc.c" />
+    <None Include="jni\libopenjpeg\mqc.h" />
+    <None Include="jni\libopenjpeg\openjpeg.c" />
+    <None Include="jni\libopenjpeg\openjpeg.h" />
+    <None Include="jni\libopenjpeg\opj_config.h" />
+    <None Include="jni\libopenjpeg\opj_includes.h" />
+    <None Include="jni\libopenjpeg\opj_malloc.h" />
+    <None Include="jni\libopenjpeg\phix_manager.c" />
+    <None Include="jni\libopenjpeg\pi.c" />
+    <None Include="jni\libopenjpeg\pi.h" />
+    <None Include="jni\libopenjpeg\ppix_manager.c" />
+    <None Include="jni\libopenjpeg\raw.c" />
+    <None Include="jni\libopenjpeg\raw.h" />
+    <None Include="jni\libopenjpeg\t1.c" />
+    <None Include="jni\libopenjpeg\t1.h" />
+    <None Include="jni\libopenjpeg\t1_generate_luts.c" />
+    <None Include="jni\libopenjpeg\t1_luts.h" />
+    <None Include="jni\libopenjpeg\t2.c" />
+    <None Include="jni\libopenjpeg\t2.h" />
+    <None Include="jni\libopenjpeg\tcd.c" />
+    <None Include="jni\libopenjpeg\tcd.h" />
+    <None Include="jni\libopenjpeg\tgt.c" />
+    <None Include="jni\libopenjpeg\tgt.h" />
+    <None Include="jni\libopenjpeg\thix_manager.c" />
+    <None Include="jni\libopenjpeg\tpix_manager.c" />
+
+
+
+  </Files>
+</Project>

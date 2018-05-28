@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="OpenMetaverse.StructuredData" Path="..\OpenMetaverse.StructuredData" Type="Library">
+  <References>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="OpenMetaverseTypes" />
+  </References>
+  <Files>
+    <Compile Include="StructuredData.cs">
+    </Compile>
+    <Compile Include="JSON\IJsonWrapper.cs">
+    </Compile>
+    <Compile Include="JSON\JsonData.cs">
+    </Compile>
+    <Compile Include="JSON\JsonException.cs">
+    </Compile>
+    <Compile Include="JSON\JsonMapper.cs">
+    </Compile>
+    <Compile Include="JSON\JsonMockWrapper.cs">
+    </Compile>
+    <Compile Include="JSON\JsonReader.cs">
+    </Compile>
+    <Compile Include="JSON\JsonWriter.cs">
+    </Compile>
+    <Compile Include="JSON\Lexer.cs">
+    </Compile>
+    <Compile Include="JSON\OSDJson.cs">
+    </Compile>
+    <Compile Include="JSON\ParserToken.cs">
+    </Compile>
+    <Compile Include="LLSD\BinaryLLSD.cs">
+    </Compile>
+    <Compile Include="LLSD\NotationLLSD.cs">
+    </Compile>
+    <Compile Include="LLSD\XmlLLSD.cs">
+    </Compile>
+  </Files>
+</Project>

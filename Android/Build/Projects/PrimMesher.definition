@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="PrimMesher" Path="PrimMesher\PrimMesher" Type="Library">
+   <!-- Common assembly references -->
+  <References>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+  </References>
+ 
+  <Properties>
+    <NoWarn>1591,1574,0419,0618</NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <CustomDefinitions>
+      <Platform Name="Android">TRACE;VERTEX_INDEXER;ANDROID</Platform>
+    </CustomDefinitions>
+    <OutputPath>../bin/</OutputPath>
+  </Properties>
+
+  <Files>
+    <Compile Include="ObjMesh.cs" />
+    <Compile Include="PrimMesher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SculptMap.cs" />
+    <Compile Include="SculptMesh.cs" />
+    <Compile Include="VertexIndexer.cs" />
+  </Files>
+</Project>
