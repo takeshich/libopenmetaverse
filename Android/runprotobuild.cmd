@@ -1,7 +1,7 @@
 mkdir ..\OpenMetaverse\jni
 xcopy /S ..\openjpeg-dotnet\dotnet ..\OpenMetaverse\jni\dotnet\
 xcopy /S ..\openjpeg-dotnet\libopenjpeg ..\OpenMetaverse\jni\libopenjpeg\
-xcopy jni\*.* ..\OpenMetaverse\jni\
+xcopy /S ..\openjpeg-dotnet\*.mk ..\OpenMetaverse\jni\
 
 cd ..\OpenMetaverse\jni
 call %ANDROID_NDK_PATH%\ndk-build.cmd

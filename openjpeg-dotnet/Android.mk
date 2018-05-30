@@ -1,3 +1,4 @@
+# Android makefile for OpenJPEG
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
