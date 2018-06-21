@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ExternalProject Name="OpenMetaverse.Rendering.MeshmerizerReference">
+  <Platform Type="Android">
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="OpenMetaverse" />
+    <Reference Include="OpenMetaverseTypes" />
+    <Reference Include="OpenMetaverse.StructuredData" />
+    <Reference Include="PrimMesher" />
+  </Platform>
+
+</ExternalProject>
+    

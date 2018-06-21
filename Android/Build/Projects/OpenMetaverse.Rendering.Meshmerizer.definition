@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="OpenMetaverse.Rendering.Meshmerizer" Path="..\OpenMetaverse.Rendering.Meshmerizer" Type="Library">
+   <!-- Common assembly references -->
+  <References>
+    <!-- See OpenMetaverse.Rendering.MeshmerizerReference.definition for the platform specific references -->
+        <!-- See FrameworkReferences.definition for the platform specific references -->
+    <Reference Include="OpenMetaverse.Rendering.MeshmerizerReference" />
+  </References>
+ 
+  <Properties>
+    <NoWarn>1591,1574,0419,0618</NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <CustomDefinitions>
+      <Platform Name="Android">TRACE;ANDROID</Platform>
+    </CustomDefinitions>
+    <OutputPath>../bin/</OutputPath>
+  </Properties>
+
+  <Files>
+      <Compile Include="MeshmerizerR.cs">
+      <Platforms>Windows,Mac,Linux</Platforms>
+    </Compile>
+    <Compile Include="..\Android\src\MeshmerizerR.cs">
+      <Link>MeshmerizerR.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+  </Files>
+</Project>

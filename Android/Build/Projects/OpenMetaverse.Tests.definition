@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="OpenMetaverse.Tests" Path="..\OpenMetaverse.Tests" Type="App">
+   <!-- Common assembly references -->
+  <References>
+    <!-- See FrameworkReferences.definition for the platform specific references -->
+    <Reference Include="OpenMetaverse.TestsReference" />
+  </References>
+ 
+  <Properties>
+    <NoWarn>1591,1574,0419,0618</NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <CustomDefinitions>
+      <Platform Name="Android">TRACE;ANDROID</Platform>
+    </CustomDefinitions>
+    <OutputPath>../bin/</OutputPath>
+  </Properties>
+
+  <Files>
+    <AndroidResource Include="..\Android\src\Resources\drawable\Icon.png">
+      <Link>Resources\drawable\Icon.png</Link>
+    </AndroidResource>
+    <Compile Include="..\Android\src\MainActivity.cs">
+      <Link>MainActivity.cs</Link>
+      <Platforms>Android</Platforms>
+    </Compile>
+    <Compile Include="BinaryLLSDTests.cs">
+    </Compile>
+    <Compile Include="MessageTests.cs">
+    </Compile>
+    <Compile Include="NetworkTests.cs">
+    </Compile>
+    <Compile Include="NotationLLSDTests.cs">
+    </Compile>
+    <Compile Include="PacketTests.cs">
+    </Compile>
+    <Compile Include="PrimObjectTests.cs">
+    </Compile>
+    <Compile Include="TypeTests.cs">
+    </Compile>
+    <Compile Include="XmlLLSDTests.cs">
+    </Compile>
+  </Files>
+</Project>

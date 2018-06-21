@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Nwc" Path="XmlRpcCS\src\nwc" Type="Library">
+   <!-- Common assembly references -->
+  <References>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </References>
+ 
+  <Properties>
+    <NoWarn>1591,1574,0419,0618</NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <CustomDefinitions>
+      <Platform Name="Android">TRACE;ANDROID</Platform>
+    </CustomDefinitions>
+    <OutputPath>../bin/</OutputPath>
+  </Properties>
+
+  <Files>
+    <Compile Include="xmlrpc\AssemblyInfo.cs" />
+    <Compile Include="xmlrpc\Logger.cs" />
+    <Compile Include="xmlrpc\SimpleHttpRequest.cs" />
+    <Compile Include="xmlrpc\XmlRpcBoxcarRequest.cs" />
+    <Compile Include="xmlrpc\XmlRpcClientProxy.cs" />
+    <Compile Include="xmlrpc\XmlRpcDeserializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcErrorCodes.cs" />
+    <Compile Include="xmlrpc\XmlRpcException.cs" />
+    <Compile Include="xmlrpc\XmlRpcExposedAttribute.cs" />
+    <Compile Include="xmlrpc\XmlRpcRequest.cs" />
+    <Compile Include="xmlrpc\XmlRpcRequestDeserializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcRequestSerializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcResponder.cs" />
+    <Compile Include="xmlrpc\XmlRpcResponse.cs" />
+    <Compile Include="xmlrpc\XmlRpcResponseDeserializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcResponseSerializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcSerializer.cs" />
+    <Compile Include="xmlrpc\XmlRpcServer.cs" />
+    <Compile Include="xmlrpc\XmlRpcSystemObject.cs" />
+    <Compile Include="xmlrpc\XmlRpcXmlTokens.cs" />
+  </Files>
+</Project>

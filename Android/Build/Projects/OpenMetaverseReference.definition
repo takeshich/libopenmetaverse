@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ExternalProject Name="OpenMetaverseReference">
+  <Platform Type="Android">
+  <!-- Reference to a GAC assembly -->
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    
+    <Reference Include="Mono.Android" />
+    <Reference Include="OpenMetaverse.StructuredData" />
+    <Reference Include="OpenMetaverseTypes" />
+    <Reference Include="SmartThreadPool" />
+    <Reference Include="Nwc" />
+    <Reference Include="log4net" />
+    <Reference Include="zlib.net" />
+   </Platform>
+  
+</ExternalProject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name>OpenMetaverse</Name>
+  <DefaultAction>Generate</DefaultAction>
+  <DefaultLinuxPlatforms>Linux</DefaultLinuxPlatforms>
+  <DefaultMacOSPlatforms>MacOS,iOS,Android,Linux</DefaultMacOSPlatforms>
+  <DefaultWindowsPlatforms>Android,Linux,Windows,iOS</DefaultWindowsPlatforms>
+  <SupportedPlatforms>Android,Windows</SupportedPlatforms>
+  <DisableSynchronisation>true</DisableSynchronisation>
+  <GenerateNuGetRepositories>false</GenerateNuGetRepositories>
+  <Packages>
+    <Package Uri="https-git://github.com/takeshich/log4net-201310.git" Folder="log4net" GitRef="master" />
+    <Package Uri="https-git://github.com/takeshich/SmartThreadPool.git" Folder="SmartThreadPool" GitRef="forandroid" />
+    <Package Uri="https-git://github.com/takeshich/XmlRpcCS.git" Folder="XmlRpcCS" GitRef="forandroid" />
+    <Package Uri="https-git://github.com/takeshich/PrimMesher.git" Folder="PrimMesher" GitRef="forandroid" />
+    <Package Uri="https-git://github.com/takeshich/ZLIB.NET.git" Folder="zlib.net" GitRef="forandroid" />
+  </Packages>
+</Module>
