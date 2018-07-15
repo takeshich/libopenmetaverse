@@ -14,8 +14,7 @@ Protobuild.exe --generate Android
 
 rem set MSBuild="C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
 set MSBuild="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
-echo %MSBuild% OpenMetaverse.Android.sln /p:Configuration=Release >> compile.cmd
-
-compile.cmd
+%MSBuild% OpenMetaverse.Android.sln /p:Configuration=Release
 
 xcopy /S ..\OpenMetaverse\bin bin\
+xcopy /S ..\OpenMetaverse.Rendering.Meshmerizer\bin bin\
