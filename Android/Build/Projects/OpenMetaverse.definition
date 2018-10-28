@@ -174,10 +174,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Platforms>Android</Platforms>
     </EmbeddedNativeLibrary>
-    <EmbeddedNativeLibrary Include="libs\armeabi\libopenjpeg-dotnet.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Platforms>Android</Platforms>
-    </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="libs\x86\libopenjpeg-dotnet.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Platforms>Android</Platforms>
