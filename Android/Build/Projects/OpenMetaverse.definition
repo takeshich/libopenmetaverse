@@ -238,7 +238,10 @@
     <None Include="jni\libopenjpeg\thix_manager.c" />
     <None Include="jni\libopenjpeg\tpix_manager.c" />
 
-
+    <AndroidEnviroment Include="..\Android\src\Enviroment.txt">
+      <Link>Enviroment.txt</Link>
+      <Platforms>Android</Platforms>
+    </AndroidEnviroment>
 
   </Files>
 </Project>
