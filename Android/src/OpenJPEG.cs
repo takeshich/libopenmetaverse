@@ -101,68 +101,75 @@ namespace OpenMetaverse.Imaging
         #endregion JPEG2000 Structs
 
         #region Unmanaged Function Declarations
-
+#if ANDROID
+        const string OPENJPEG_DOTNET = "openjpeg-dotnet.dll";
+        const string OPENJPEG_DOTNET_64 = "openjpeg-dotnet.dll";
+#else
+        const string OPENJPEG_DOTNET = "openjpeg-dotnet.dll";
+        const string OPENJPEG_DOTNET_64 = "openjpeg-dotnet-x86_64.dll";
+#endif
 
         // allocate encoded buffer based on length field
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetAllocEncoded(ref MarshalledImage image);
 
         // allocate decoded buffer based on width and height fields
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetAllocDecoded(ref MarshalledImage image);
 
         // free buffers
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetFree(ref MarshalledImage image);
 
         // encode raw to jpeg2000
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetEncode(ref MarshalledImage image, bool lossless);
 
         // decode jpeg2000 to raw
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetDecode(ref MarshalledImage image);
 
         // decode jpeg2000 to raw, get jpeg2000 file info
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetDecodeWithInfo(ref MarshalledImage image);
+
 
         // invoke 64 bit openjpeg calls        
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetAllocEncoded64(ref MarshalledImage image);
 
         // allocate decoded buffer based on width and height fields
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetAllocDecoded64(ref MarshalledImage image);
 
         // free buffers
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetFree64(ref MarshalledImage image);
 
         // encode raw to jpeg2000
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetEncode64(ref MarshalledImage image, bool lossless);
 
         // decode jpeg2000 to raw
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetDecode64(ref MarshalledImage image);
 
         // decode jpeg2000 to raw, get jpeg2000 file info
         [System.Security.SuppressUnmanagedCodeSecurity]
-        [DllImport("openjpeg-dotnet-x86_64.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OPENJPEG_DOTNET_64, CallingConvention = CallingConvention.Cdecl)]
         private static extern bool DotNetDecodeWithInfo64(ref MarshalledImage image);
-        #endregion Unmanaged Function Declarations
+#endregion Unmanaged Function Declarations
 
         /// <summary>OpenJPEG is not threadsafe, so this object is used to lock
         /// during calls into unmanaged code</summary>
@@ -588,4 +595,4 @@ namespace OpenMetaverse.Imaging
 //        }
    }
 #endif
-}
+    }
