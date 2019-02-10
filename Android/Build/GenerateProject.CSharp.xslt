@@ -1217,14 +1217,7 @@
         <xsl:choose>
           <xsl:when test="$root/Input/Generation/Platform = 'Android' or $root/Input/Generation/Platform = 'Ouya'">
             <FileAlignment>512</FileAlignment>
-            <xsl:choose>
-              <xsl:when test="user:HasXamarinAndroidTargets()">
-                <AndroidSupportedAbis>armeabi,armeabi-v7a,arm64-v8a,x86,x86_64</AndroidSupportedAbis>
-              </xsl:when>
-              <xsl:otherwise>
-                <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
-              </xsl:otherwise>
-            </xsl:choose>
+            <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
             <AndroidStoreUncompressedFileExtensions />
             <MandroidI18n />
             <DeployExternal>False</DeployExternal>

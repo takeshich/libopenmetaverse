@@ -1,4 +1,4 @@
-Protobuild.exe --clean
+Protobuild.exe --clean Android
 
 rd /s /q ..\OpenMetaverse\obj
 rd /s /q ..\OpenMetaverse\jni
