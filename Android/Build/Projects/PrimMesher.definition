@@ -10,7 +10,7 @@
   <Properties>
     <NoWarn>1591,1574,0419,0618</NoWarn>
     <WarningLevel>4</WarningLevel>
-    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <CustomDefinitions>
       <Platform Name="Android">TRACE;VERTEX_INDEXER;ANDROID</Platform>
     </CustomDefinitions>
